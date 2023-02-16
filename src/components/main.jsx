@@ -3,6 +3,7 @@ import * as select from "./select";
 import React, { useState } from "react";
 import { Table } from "./table";
 import './main.scss'
+import { bodyRequest } from "./utils";
 
 export const Main = () => {
   const [info, setInfo] = useState([])
@@ -11,9 +12,7 @@ export const Main = () => {
   const executeQuery = () => {
     const url = `http://127.0.0.1:7350/v2/rpc/${rpc}?http_key=lovemonster&unwrap`
     axios
-      .post(url, {
-        'body': '{"isStaked":false}'
-    })
+      .post(url, bodyRequest(rpc))
       .then((response) => {
         const {data} = response
         setInfo(data)
